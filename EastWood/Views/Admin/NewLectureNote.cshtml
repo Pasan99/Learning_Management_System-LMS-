@@ -1,0 +1,132 @@
+﻿@model EastWood.Models.LectureNote
+
+@{
+    ViewBag.Title = "New Lecture Note";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+
+@using (Html.BeginForm("NewLectureNote", "Admin", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
+{
+    <div class="row">
+        <div class="col">
+            <h2>Lecture Note</h2>
+        </div>
+        <div class="col">
+            <input type="submit" value="Save" class="btn btn-primary btn float-right" />
+        </div>
+    </div>
+
+    <br />
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SubjectId)
+    @Html.HiddenFor(model => model.LectureNoteid)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LectureNoteName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LectureNoteName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.LectureNoteName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LectureNoteDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LectureNoteDescription, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.LectureNoteDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LectureNoteDate, "Lecture Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LectureNoteDate, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.LectureNoteDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <div class="form-control-file">
+                        @Html.LabelFor(model => model.LectureNoteDate, "Files", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input style="margin-top:8px;" class="form-control-file" multiple type="file" name="file" id="file">
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+}
+
+@if (Model.Attachments != null && Model.Attachments.Count > 0)
+{
+    <hr />
+    <br />
+    <h5>Attachments</h5>
+    <br />
+    <table id="example" class="display" style="width:100%">
+        <thead>
+
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Names
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Attachments)
+            {
+                <tr>
+                    <td width="3%">
+                        @item.AttachmentId
+                    </td>
+                    <td width="40%">
+                        @item.AttachmentName
+                    </td>
+                    <td width="15%">
+                        @(EastWood.Utilities.FileHelper.GetConvertedFileSize(item.AttachmentFileSize))
+                    </td>
+                    <td class="text-center" width="15%">
+                        <a href="/Admin/Download?Url=@item.AttachmentUrl&Name=@item.AttachmentName" class="btn btn-primary">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+

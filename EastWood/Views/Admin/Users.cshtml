@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EastWood.Models.User>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+<div class="row">
+    <div class="col">
+        <h1>Users</h1>
+    </div>
+    <div class="col">
+        <a href="/Admin/Register" class="btn btn-primary float-right">New User</a>
+    </div>
+</div>
+<br />
+<table id="example" class="display" style="width:100%">
+    <thead>
+
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
+                Last Logged In
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Contact
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="15%">@item.UserFirstName @item.UserLastName</td>
+                <td width="8%">@item.Role.RoleName</td>
+                <td width="15%">@item.UserLastLoggedIn</td>
+                <td width="20%">@item.UserEmail</td>
+                <td width="10%">@item.UserContactNo</td>
+                @*<td class="text-center">
+                    <a href="/Admin/Register/@item.UserId" class="btn btn-primary">Edit</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>

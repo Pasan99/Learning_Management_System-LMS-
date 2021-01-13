@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EastWood.ViewModel.Admin.AssignmentItem>
+@{
+    ViewBag.Title = "Assignments";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+<div class="row">
+    <div class="col">
+        <h1>Assignments</h1>
+    </div>
+</div>
+<br />
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Issue Date</th>
+            <th>Deadline</th>
+            <th>Marks release on</th>
+            <th class="text-center">Grade</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td style="width:3%">@course.Assignment.AssignmentId</td>
+                <td style="width:15%">@course.Assignment.AssignmentName</td>
+                <td style="width:15%">@course.Subject.SubjectName</td>
+                <td style="width:15%">@course.Assignment.AssignmentIssuedOn</td>
+                <td style="width:15%">@course.Assignment.AssignmentDeadline</td>
+                <td style="width:15%">@course.Assignment.AssignmentMarksReleaseOn</td>
+                <td style="width:10%; font-weight:bold;" class="text-center">@course.AssignmentGrade (@course.AssignmentMarks)</td>
+                <td class="text-center">
+                    <a href="/Student/ViewAssignment/@course.Assignment.AssignmentId" class="btn btn-primary">View</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+

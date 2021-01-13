@@ -1,0 +1,51 @@
+﻿@model EastWood.Models.Semester
+
+@{
+    ViewBag.Title = "NewSemester";
+}
+
+<h2>Semester</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SemesterId)
+    @Html.HiddenFor(model => model.CourseId)
+
+    <div class="form-horizontal">
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SemesterStartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SemesterStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SemesterStartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SemesterEndDate, "End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SemesterEndDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SemesterEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SemesterName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SemesterName, "Name", new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SemesterName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+</div>

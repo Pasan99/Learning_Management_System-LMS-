@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f76f354e7937496287738e309e82cc19" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="EastWoodModel.Assignment" Width="1.5" PointX="12.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.AssignmentUpload" Width="1.5" PointX="14.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Attachment" Width="1.5" PointX="16.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Coordinator" Width="1.5" PointX="8.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Course" Width="1.5" PointX="10.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.LectureNote" Width="1.5" PointX="12.625" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Lecturer" Width="1.5" PointX="8.375" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Role" Width="1.5" PointX="6.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Semester" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.SemesterResult" Width="1.5" PointX="12.625" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Student" Width="1.5" PointX="6.125" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.StudentCourse" Width="1.5" PointX="8.375" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.StudentSubject" Width="1.5" PointX="8.375" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.StudyMaterial" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.Subject" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastWoodModel.User" Width="1.5" PointX="6.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="EastWoodModel.FK_Assignment_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_AssignmentUpload_Assignment" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_AssignmentUpload_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Coordinator_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_StudentCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_LectureNote_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Lecturer_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Subject_Lecturer" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_SemesterResult_Semester" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Subject_Semester" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_SemesterResult_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Student_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_StudentCourse_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_StudentSubject_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_StudentSubject_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_StudyMaterial_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="EastWoodModel.FK_Course_Coordinator" />
+        <AssociationConnector Association="EastWoodModel.FK_Semester_Course" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

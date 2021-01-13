@@ -1,0 +1,93 @@
+﻿@model EastWood.ViewModel.Admin.EditCourseItem
+
+@{
+    ViewBag.Title = "NewCourse";
+}
+
+@if (Model == null || Model.CourseId == 0)
+{
+    <h2>New Course</h2>
+}
+else
+{
+    <h2>Edit Course</h2>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CourseId)
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <div class="control-label col-md-2">Name</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control", @required = "required" }, @required = "required" })
+                    @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2">Description</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CourseDescription, new { htmlAttributes = new { @class = "form-control", @required = "required" }, @required = "required" })
+                    @Html.ValidationMessageFor(model => model.CourseDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2">Starts On</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CourseStartsOn, new { htmlAttributes = new { @class = "form-control", @required = "required", @type="datetime-local" }, @required = "required" })
+                    @Html.ValidationMessageFor(model => model.CourseStartsOn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <div class="control-label col-md-2">Ends On</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CourseEndsOn, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "datetime-local" }, @required = "required" })
+                    @Html.ValidationMessageFor(model => model.CourseEndsOn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2">Coordinator</div>
+                <div class="col-md-10">
+                    <select required class="form-control" name="CoordinatorId">
+                        @foreach (var item in Model.Coordinators)
+                        {
+                            if (item.CoordinatorId == Model.CoordinatorId)
+                            {
+                                <option selected value="1">@item.UserFirstName @item.UserLastName</option>
+                            }
+                            else
+                            {
+                                <option value="1">@item.UserFirstName @item.UserLastName</option>
+                            }
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.CoordinatorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+}
+

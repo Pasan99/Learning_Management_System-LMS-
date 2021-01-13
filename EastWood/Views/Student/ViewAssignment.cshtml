@@ -1,0 +1,214 @@
+﻿@model EastWood.Models.Assignment
+
+@{
+    ViewBag.Title = "Assignment";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+
+
+<div class="row">
+    <div class="col">
+        <h2>@Model.AssignmentName</h2>
+    </div>
+    <div>
+        <p style="margin-right:20px; " class="text-danger">@ViewBag.Message</p>
+        <button type="button" class="btn btn-primary float-right" style="margin-right:20px; font-size:16px;" data-toggle="modal" data-target="#exampleModal">
+            Upload (Submit)
+        </button>
+
+    </div>
+</div>
+
+
+<br />
+<p style="font-size:14px;">@Model.AssignmentDescription</p>
+<br />
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col">
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p style="font-weight:bold" class="text-primary">Marks Releases On</p>
+                </div>
+                <div class="col-md-8">
+                    @Model.AssignmentMarksReleaseOn
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p style="font-weight:bold" class="text-primary">Deadline</p>
+                </div>
+                <div class="col-md-8">
+                    @Model.AssignmentMarksReleaseOn
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="col">
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p style="font-weight:bold" class="text-primary">Max Upload Size</p>
+                </div>
+                <div class="col-md-8">
+                    @(EastWood.Utilities.FileHelper.GetConvertedFileSize(Model.AssignmentMaxFileSize))
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+@if (Model.Attachments != null && Model.AssignmentUploads.Count > 0 && Model.AssignmentUploads.First().Attachments != null)
+{
+    <hr />
+    <br />
+    <h5>Uploads (Submitted content)</h5>
+    <br />
+    <table id="example2" class="display table-bordered" style="width:100%">
+        <thead>
+
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Names
+                </th>
+                <th>
+                    Submitted on
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.AssignmentUploads.First().Attachments)
+            {
+                <tr>
+                    <td width="3%">
+                        @item.AttachmentId
+                    </td>
+                    <td width="40%">
+                        @item.AttachmentName
+                    </td>
+                    <td width="15%">
+                        @(Model.AssignmentUploads.First().AssignmentUploadSubmittedOn)
+                    </td>
+                    <td width="12%">
+                        @(EastWood.Utilities.FileHelper.GetConvertedFileSize(item.AttachmentFileSize))
+                    </td>
+                    <td class="text-center" width="15%">
+                        <a href="/Admin/Download?Url=@item.AttachmentUrl&Name=@item.AttachmentName" class="btn btn-primary">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@if (Model.Attachments != null && Model.Attachments.Count > 0)
+{
+    <hr />
+    <br />
+    <h5>Attachments</h5>
+    <br />
+    <table id="example" class="display" style="width:100%">
+        <thead>
+
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Names
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Attachments)
+            {
+                <tr>
+                    <td width="3%">
+                        @item.AttachmentId
+                    </td>
+                    <td width="40%">
+                        @item.AttachmentName
+                    </td>
+                    <td width="15%">
+                        @(EastWood.Utilities.FileHelper.GetConvertedFileSize(item.AttachmentFileSize))
+                    </td>
+                    <td class="text-center" width="15%">
+                        <a href="/Admin/Download?Url=@item.AttachmentUrl&Name=@item.AttachmentName" class="btn btn-primary">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Submit Work</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("SubmitAssignment", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input hidden name="AssignmentUploadId" value="@(Model.AssignmentUploads.Count > 0 ? Model.AssignmentUploads.First().AssignmentUploadId : 0)" />
+                <input hidden name="AssignmentId" value="@Model.AssignmentId" />
+                <input hidden name="AssignmentUploadIsAfterDeadline" value="@((Model.AssignmentDeadline - DateTime.Now).TotalSeconds > 0)" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-control-file">
+                            <div class="col-md-10">
+                                <input required style="margin-top:8px;" class="form-control-file" multiple type="file" name="file" id="file">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input value="Submit" type="submit" class="btn btn-primary" />
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+        $('#example2').DataTable();
+    });
+</script>
+

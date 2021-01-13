@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EastWood.Models.Subject>
+
+@{
+    ViewBag.Title = "Subjects";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+<div class="row">
+    <div class="col">
+        <h1>Subjects</h1>
+    </div>
+    <div class="col">
+        <a href="/Admin/NewSubject?SemesterId=@ViewBag.SemesterId" class="btn btn-primary float-right">New Subject</a>
+    </div>
+</div>
+<br />
+<table id="example" class="display" style="width:100%">
+    <thead>
+
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Semester
+            </th>
+            <th>
+                Lecturer
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester.SemesterName)
+                </td>
+                <td>
+                    @item.Lecturer.User.UserFirstName @item.Lecturer.User.UserLastName
+                    @* @Html.DisplayFor(modelItem => item.Lecturer.User.UserFirstName + " " + item.Lecturer.User.UserLastName)*@
+                </td>
+                <td class="text-center">
+                    <a href="/Admin/NewSubject/@item.SubjectId" class="btn btn-primary">Edit</a>
+                    <a href="/Admin/Assignments/@item.SubjectId" class="btn btn-primary">Assignments</a>
+                    <a href="/Admin/LectureNotes/@item.SubjectId" class="btn btn-primary">Notes</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>

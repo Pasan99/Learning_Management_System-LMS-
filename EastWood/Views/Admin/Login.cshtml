@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+@model EastWood.Models.User
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>Signin Template for Bootstrap</title>
+    <link href="~/Content/LoginCss.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    @using (Html.BeginForm())
+    {
+    <div class="form-signin" style="width:600px;">
+        @Html.AntiForgeryToken()
+
+        <img class="mb-4" src="~/Content/images/ui-icons_444444_256x240.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="UserEmail" class="sr-only">Email address</label>
+        @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Email address", @autofocus = "autofocus" }, @required = "required" })
+        <label for="UserPassword" class="sr-only">Password</label>
+        @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Email address", @type = "password" }, @required = "required" })
+        @if (ViewBag.Message != null || ViewBag.Message != "")
+        {
+            <p class="text-danger">@ViewBag.Message</p>
+        }
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <br />
+        <a href='/Student/Login' class='btn-link'>Student Login</a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </div>
+       
+    }
+    </body>
+</html>
+

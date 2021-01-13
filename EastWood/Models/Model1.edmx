@@ -1,0 +1,1213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EastWoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="AssignmentId" />
+          </Key>
+          <Property Name="AssignmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AssignmentDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="AssignmentIssuedOn" Type="datetime" Nullable="false" />
+          <Property Name="AssignmentMarksReleaseOn" Type="datetime" Nullable="false" />
+          <Property Name="AssignmentDeadline" Type="datetime" Nullable="false" />
+          <Property Name="AssignmentMaxFileSize" Type="float" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssignmentUpload">
+          <Key>
+            <PropertyRef Name="AssignmentUploadId" />
+          </Key>
+          <Property Name="AssignmentUploadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentUploadSubmittedOn" Type="datetime" Nullable="false" />
+          <Property Name="AssignmentUploadGrade" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AssignmentUploadMarks" Type="float" Nullable="false" />
+          <Property Name="AssignmentUploadIsAfterDeadline" Type="bit" Nullable="false" />
+          <Property Name="AssignmentId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AttachmentFileSize" Type="float" Nullable="false" />
+          <Property Name="AttachmentUrl" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="AttachmentReferenceType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AttachmentReferenceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coordinator">
+          <Key>
+            <PropertyRef Name="CoordinatorId" />
+          </Key>
+          <Property Name="CoordinatorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseDescription" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="CourseStartsOn" Type="datetime" Nullable="false" />
+          <Property Name="CourseEndsOn" Type="datetime" Nullable="false" />
+          <Property Name="CoordinatorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LectureNote">
+          <Key>
+            <PropertyRef Name="LectureNoteid" />
+          </Key>
+          <Property Name="LectureNoteid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LectureNoteName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LectureNoteDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="LectureNoteSubmittedOn" Type="datetime" Nullable="false" />
+          <Property Name="LectureNoteDate" Type="datetime" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="LecturerId" />
+          </Key>
+          <Property Name="LecturerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Semester">
+          <Key>
+            <PropertyRef Name="SemesterId" />
+          </Key>
+          <Property Name="SemesterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemesterStartDate" Type="datetime" Nullable="false" />
+          <Property Name="SemesterEndDate" Type="datetime" Nullable="false" />
+          <Property Name="SemesterName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SemesterResult">
+          <Key>
+            <PropertyRef Name="SemesterResultId" />
+          </Key>
+          <Property Name="SemesterResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemesterResultMarks" Type="float" Nullable="false" />
+          <Property Name="SemesterResultGrade" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SemesterId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="StudentCourseId" />
+          </Key>
+          <Property Name="StudentCourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentSubject">
+          <Key>
+            <PropertyRef Name="StudentSubjectId" />
+          </Key>
+          <Property Name="StudentSubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentSubjectMarks" Type="float" Nullable="false" />
+          <Property Name="StudentSubjectGrade" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudyMaterial">
+          <Key>
+            <PropertyRef Name="StudyMaterialId" />
+          </Key>
+          <Property Name="StudyMaterialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyMaterialName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StudyMaterialDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="StudyMaterialSubmittedOn" Type="datetime" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubjectDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="SemesterId" Type="int" Nullable="false" />
+          <Property Name="LecturerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserLastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserBio" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="UserLastLoggedIn" Type="datetime" Nullable="false" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Assignment_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignmentUpload_Assignment">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="AssignmentUpload" Type="Self.AssignmentUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="AssignmentId" />
+            </Principal>
+            <Dependent Role="AssignmentUpload">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignmentUpload_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="AssignmentUpload" Type="Self.AssignmentUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="AssignmentUpload">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coordinator_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Coordinator" Type="Self.Coordinator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Coordinator">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Coordinator">
+          <End Role="Coordinator" Type="Self.Coordinator" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coordinator">
+              <PropertyRef Name="CoordinatorId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CoordinatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LectureNote_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="LectureNote" Type="Self.LectureNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="LectureNote">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lecturer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Semester_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Semester" Type="Self.Semester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Semester">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemesterResult_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="SemesterResult" Type="Self.SemesterResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="SemesterResult">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemesterResult_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="SemesterResult" Type="Self.SemesterResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="SemesterResult">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSubject_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentSubject">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSubject_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="StudentSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudyMaterial_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="StudyMaterial" Type="Self.StudyMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="StudyMaterial">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Lecturer">
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="LecturerId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="LecturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EastWoodModelStoreContainer">
+          <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignmentUpload" EntityType="Self.AssignmentUpload" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coordinator" EntityType="Self.Coordinator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LectureNote" EntityType="Self.LectureNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecturer" EntityType="Self.Lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SemesterResult" EntityType="Self.SemesterResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentSubject" EntityType="Self.StudentSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudyMaterial" EntityType="Self.StudyMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Assignment_Subject" Association="Self.FK_Assignment_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignmentUpload_Assignment" Association="Self.FK_AssignmentUpload_Assignment">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="AssignmentUpload" EntitySet="AssignmentUpload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignmentUpload_Student" Association="Self.FK_AssignmentUpload_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="AssignmentUpload" EntitySet="AssignmentUpload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinator_User" Association="Self.FK_Coordinator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Coordinator" EntitySet="Coordinator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Coordinator" Association="Self.FK_Course_Coordinator">
+            <End Role="Coordinator" EntitySet="Coordinator" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LectureNote_Subject" Association="Self.FK_LectureNote_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="LectureNote" EntitySet="LectureNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lecturer_User" Association="Self.FK_Lecturer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Lecturer" EntitySet="Lecturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Semester_Course" Association="Self.FK_Semester_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Semester" EntitySet="Semester" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemesterResult_Semester" Association="Self.FK_SemesterResult_Semester">
+            <End Role="Semester" EntitySet="Semester" />
+            <End Role="SemesterResult" EntitySet="SemesterResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemesterResult_Student" Association="Self.FK_SemesterResult_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="SemesterResult" EntitySet="SemesterResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Student" Association="Self.FK_StudentCourse_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSubject_Student" Association="Self.FK_StudentSubject_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSubject" EntitySet="StudentSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSubject_Subject" Association="Self.FK_StudentSubject_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="StudentSubject" EntitySet="StudentSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudyMaterial_Subject" Association="Self.FK_StudyMaterial_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="StudyMaterial" EntitySet="StudyMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Lecturer" Association="Self.FK_Subject_Lecturer">
+            <End Role="Lecturer" EntitySet="Lecturer" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Semester" Association="Self.FK_Subject_Semester">
+            <End Role="Semester" EntitySet="Semester" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EastWoodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="AssignmentId" />
+          </Key>
+          <Property Name="AssignmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AssignmentDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AssignmentIssuedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignmentMarksReleaseOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignmentDeadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignmentMaxFileSize" Type="Double" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Assignment_Subject" FromRole="Assignment" ToRole="Subject" />
+          <NavigationProperty Name="AssignmentUploads" Relationship="Self.FK_AssignmentUpload_Assignment" FromRole="Assignment" ToRole="AssignmentUpload" />
+        </EntityType>
+        <EntityType Name="AssignmentUpload">
+          <Key>
+            <PropertyRef Name="AssignmentUploadId" />
+          </Key>
+          <Property Name="AssignmentUploadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentUploadSubmittedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignmentUploadGrade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AssignmentUploadMarks" Type="Double" Nullable="false" />
+          <Property Name="AssignmentUploadIsAfterDeadline" Type="Boolean" Nullable="false" />
+          <Property Name="AssignmentId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assignment" Relationship="Self.FK_AssignmentUpload_Assignment" FromRole="AssignmentUpload" ToRole="Assignment" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_AssignmentUpload_Student" FromRole="AssignmentUpload" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttachmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttachmentFileSize" Type="Double" Nullable="false" />
+          <Property Name="AttachmentUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttachmentReferenceType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttachmentReferenceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coordinator">
+          <Key>
+            <PropertyRef Name="CoordinatorId" />
+          </Key>
+          <Property Name="CoordinatorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Coordinator_User" FromRole="Coordinator" ToRole="User" />
+          <NavigationProperty Name="Courses" Relationship="EastWoodModel.FK_Course_Coordinator" FromRole="Coordinator" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseStartsOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CourseEndsOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
+          <Property Name="CoordinatorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coordinator" Relationship="EastWoodModel.FK_Course_Coordinator" FromRole="Course" ToRole="Coordinator" />
+          <NavigationProperty Name="Semesters" Relationship="EastWoodModel.FK_Semester_Course" FromRole="Course" ToRole="Semester" />
+        </EntityType>
+        <EntityType Name="LectureNote">
+          <Key>
+            <PropertyRef Name="LectureNoteid" />
+          </Key>
+          <Property Name="LectureNoteid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LectureNoteName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LectureNoteDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LectureNoteSubmittedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LectureNoteDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_LectureNote_Subject" FromRole="LectureNote" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="LecturerId" />
+          </Key>
+          <Property Name="LecturerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Lecturer_User" FromRole="Lecturer" ToRole="User" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subject_Lecturer" FromRole="Lecturer" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Semester">
+          <Key>
+            <PropertyRef Name="SemesterId" />
+          </Key>
+          <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemesterStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SemesterEndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SemesterName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SemesterResults" Relationship="Self.FK_SemesterResult_Semester" FromRole="Semester" ToRole="SemesterResult" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subject_Semester" FromRole="Semester" ToRole="Subject" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="EastWoodModel.FK_Semester_Course" FromRole="Semester" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="SemesterResult">
+          <Key>
+            <PropertyRef Name="SemesterResultId" />
+          </Key>
+          <Property Name="SemesterResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemesterResultMarks" Type="Double" Nullable="false" />
+          <Property Name="SemesterResultGrade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SemesterId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterResult_Semester" FromRole="SemesterResult" ToRole="Semester" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_SemesterResult_Student" FromRole="SemesterResult" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AssignmentUploads" Relationship="Self.FK_AssignmentUpload_Student" FromRole="Student" ToRole="AssignmentUpload" />
+          <NavigationProperty Name="SemesterResults" Relationship="Self.FK_SemesterResult_Student" FromRole="Student" ToRole="SemesterResult" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
+          <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
+          <NavigationProperty Name="StudentSubjects" Relationship="Self.FK_StudentSubject_Student" FromRole="Student" ToRole="StudentSubject" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="StudentCourseId" />
+          </Key>
+          <Property Name="StudentCourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourse_Course" FromRole="StudentCourse" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourse_Student" FromRole="StudentCourse" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentSubject">
+          <Key>
+            <PropertyRef Name="StudentSubjectId" />
+          </Key>
+          <Property Name="StudentSubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentSubjectMarks" Type="Double" Nullable="false" />
+          <Property Name="StudentSubjectGrade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentSubject_Student" FromRole="StudentSubject" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_StudentSubject_Subject" FromRole="StudentSubject" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="StudyMaterial">
+          <Key>
+            <PropertyRef Name="StudyMaterialId" />
+          </Key>
+          <Property Name="StudyMaterialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyMaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyMaterialDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudyMaterialSubmittedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_StudyMaterial_Subject" FromRole="StudyMaterial" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SemesterId" Type="Int32" Nullable="false" />
+          <Property Name="LecturerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assignments" Relationship="Self.FK_Assignment_Subject" FromRole="Subject" ToRole="Assignment" />
+          <NavigationProperty Name="LectureNotes" Relationship="Self.FK_LectureNote_Subject" FromRole="Subject" ToRole="LectureNote" />
+          <NavigationProperty Name="Lecturer" Relationship="Self.FK_Subject_Lecturer" FromRole="Subject" ToRole="Lecturer" />
+          <NavigationProperty Name="Semester" Relationship="Self.FK_Subject_Semester" FromRole="Subject" ToRole="Semester" />
+          <NavigationProperty Name="StudentSubjects" Relationship="Self.FK_StudentSubject_Subject" FromRole="Subject" ToRole="StudentSubject" />
+          <NavigationProperty Name="StudyMaterials" Relationship="Self.FK_StudyMaterial_Subject" FromRole="Subject" ToRole="StudyMaterial" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserBio" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserLastLoggedIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coordinators" Relationship="Self.FK_Coordinator_User" FromRole="User" ToRole="Coordinator" />
+          <NavigationProperty Name="Lecturers" Relationship="Self.FK_Lecturer_User" FromRole="User" ToRole="Lecturer" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Student_User" FromRole="User" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Assignment_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignmentUpload_Assignment">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="AssignmentUpload" Type="Self.AssignmentUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="AssignmentId" />
+            </Principal>
+            <Dependent Role="AssignmentUpload">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignmentUpload_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="AssignmentUpload" Type="Self.AssignmentUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="AssignmentUpload">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coordinator_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Coordinator" Type="Self.Coordinator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Coordinator">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LectureNote_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="LectureNote" Type="Self.LectureNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="LectureNote">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lecturer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Lecturer">
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="LecturerId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="LecturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemesterResult_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="SemesterResult" Type="Self.SemesterResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="SemesterResult">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemesterResult_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="SemesterResult" Type="Self.SemesterResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="SemesterResult">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSubject_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentSubject">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSubject_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="StudentSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudyMaterial_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="StudyMaterial" Type="Self.StudyMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="StudyMaterial">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EastWoodEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assignments" EntityType="Self.Assignment" />
+          <EntitySet Name="AssignmentUploads" EntityType="Self.AssignmentUpload" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <EntitySet Name="Coordinators" EntityType="Self.Coordinator" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="LectureNotes" EntityType="Self.LectureNote" />
+          <EntitySet Name="Lecturers" EntityType="Self.Lecturer" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Semesters" EntityType="Self.Semester" />
+          <EntitySet Name="SemesterResults" EntityType="Self.SemesterResult" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentCourses" EntityType="Self.StudentCourse" />
+          <EntitySet Name="StudentSubjects" EntityType="Self.StudentSubject" />
+          <EntitySet Name="StudyMaterials" EntityType="Self.StudyMaterial" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Assignment_Subject" Association="Self.FK_Assignment_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Assignment" EntitySet="Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignmentUpload_Assignment" Association="Self.FK_AssignmentUpload_Assignment">
+            <End Role="Assignment" EntitySet="Assignments" />
+            <End Role="AssignmentUpload" EntitySet="AssignmentUploads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignmentUpload_Student" Association="Self.FK_AssignmentUpload_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="AssignmentUpload" EntitySet="AssignmentUploads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinator_User" Association="Self.FK_Coordinator_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Coordinator" EntitySet="Coordinators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="StudentCourse" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LectureNote_Subject" Association="Self.FK_LectureNote_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="LectureNote" EntitySet="LectureNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lecturer_User" Association="Self.FK_Lecturer_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Lecturer" Association="Self.FK_Subject_Lecturer">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemesterResult_Semester" Association="Self.FK_SemesterResult_Semester">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="SemesterResult" EntitySet="SemesterResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Semester" Association="Self.FK_Subject_Semester">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemesterResult_Student" Association="Self.FK_SemesterResult_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="SemesterResult" EntitySet="SemesterResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Student" Association="Self.FK_StudentCourse_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentCourse" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSubject_Student" Association="Self.FK_StudentSubject_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSubject" EntitySet="StudentSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSubject_Subject" Association="Self.FK_StudentSubject_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="StudentSubject" EntitySet="StudentSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudyMaterial_Subject" Association="Self.FK_StudyMaterial_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="StudyMaterial" EntitySet="StudyMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Coordinator" Association="EastWoodModel.FK_Course_Coordinator">
+            <End Role="Coordinator" EntitySet="Coordinators" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Semester_Course" Association="EastWoodModel.FK_Semester_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Semester" EntitySet="Semesters" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Course_Coordinator">
+          <End Type="EastWoodModel.Coordinator" Role="Coordinator" Multiplicity="1" />
+          <End Type="EastWoodModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coordinator">
+              <PropertyRef Name="CoordinatorId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CoordinatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Semester_Course">
+          <End Type="EastWoodModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="EastWoodModel.Semester" Role="Semester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Semester">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EastWoodModelStoreContainer" CdmEntityContainer="EastWoodEntities">
+          <EntitySetMapping Name="Assignments">
+            <EntityTypeMapping TypeName="EastWoodModel.Assignment">
+              <MappingFragment StoreEntitySet="Assignment">
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+                <ScalarProperty Name="AssignmentName" ColumnName="AssignmentName" />
+                <ScalarProperty Name="AssignmentDescription" ColumnName="AssignmentDescription" />
+                <ScalarProperty Name="AssignmentIssuedOn" ColumnName="AssignmentIssuedOn" />
+                <ScalarProperty Name="AssignmentMarksReleaseOn" ColumnName="AssignmentMarksReleaseOn" />
+                <ScalarProperty Name="AssignmentDeadline" ColumnName="AssignmentDeadline" />
+                <ScalarProperty Name="AssignmentMaxFileSize" ColumnName="AssignmentMaxFileSize" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignmentUploads">
+            <EntityTypeMapping TypeName="EastWoodModel.AssignmentUpload">
+              <MappingFragment StoreEntitySet="AssignmentUpload">
+                <ScalarProperty Name="AssignmentUploadId" ColumnName="AssignmentUploadId" />
+                <ScalarProperty Name="AssignmentUploadSubmittedOn" ColumnName="AssignmentUploadSubmittedOn" />
+                <ScalarProperty Name="AssignmentUploadGrade" ColumnName="AssignmentUploadGrade" />
+                <ScalarProperty Name="AssignmentUploadMarks" ColumnName="AssignmentUploadMarks" />
+                <ScalarProperty Name="AssignmentUploadIsAfterDeadline" ColumnName="AssignmentUploadIsAfterDeadline" />
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="EastWoodModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="AttachmentFileSize" ColumnName="AttachmentFileSize" />
+                <ScalarProperty Name="AttachmentUrl" ColumnName="AttachmentUrl" />
+                <ScalarProperty Name="AttachmentReferenceType" ColumnName="AttachmentReferenceType" />
+                <ScalarProperty Name="AttachmentReferenceId" ColumnName="AttachmentReferenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coordinators">
+            <EntityTypeMapping TypeName="EastWoodModel.Coordinator">
+              <MappingFragment StoreEntitySet="Coordinator">
+                <ScalarProperty Name="CoordinatorId" ColumnName="CoordinatorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="EastWoodModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CoordinatorId" ColumnName="CoordinatorId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+                <ScalarProperty Name="CourseStartsOn" ColumnName="CourseStartsOn" />
+                <ScalarProperty Name="CourseEndsOn" ColumnName="CourseEndsOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LectureNotes">
+            <EntityTypeMapping TypeName="EastWoodModel.LectureNote">
+              <MappingFragment StoreEntitySet="LectureNote">
+                <ScalarProperty Name="LectureNoteid" ColumnName="LectureNoteid" />
+                <ScalarProperty Name="LectureNoteName" ColumnName="LectureNoteName" />
+                <ScalarProperty Name="LectureNoteDescription" ColumnName="LectureNoteDescription" />
+                <ScalarProperty Name="LectureNoteSubmittedOn" ColumnName="LectureNoteSubmittedOn" />
+                <ScalarProperty Name="LectureNoteDate" ColumnName="LectureNoteDate" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="EastWoodModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturer">
+                <ScalarProperty Name="LecturerId" ColumnName="LecturerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="EastWoodModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semesters">
+            <EntityTypeMapping TypeName="EastWoodModel.Semester">
+              <MappingFragment StoreEntitySet="Semester">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="SemesterStartDate" ColumnName="SemesterStartDate" />
+                <ScalarProperty Name="SemesterEndDate" ColumnName="SemesterEndDate" />
+                <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SemesterResults">
+            <EntityTypeMapping TypeName="EastWoodModel.SemesterResult">
+              <MappingFragment StoreEntitySet="SemesterResult">
+                <ScalarProperty Name="SemesterResultId" ColumnName="SemesterResultId" />
+                <ScalarProperty Name="SemesterResultMarks" ColumnName="SemesterResultMarks" />
+                <ScalarProperty Name="SemesterResultGrade" ColumnName="SemesterResultGrade" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="EastWoodModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentCourses">
+            <EntityTypeMapping TypeName="EastWoodModel.StudentCourse">
+              <MappingFragment StoreEntitySet="StudentCourse">
+                <ScalarProperty Name="StudentCourseId" ColumnName="StudentCourseId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentSubjects">
+            <EntityTypeMapping TypeName="EastWoodModel.StudentSubject">
+              <MappingFragment StoreEntitySet="StudentSubject">
+                <ScalarProperty Name="StudentSubjectId" ColumnName="StudentSubjectId" />
+                <ScalarProperty Name="StudentSubjectMarks" ColumnName="StudentSubjectMarks" />
+                <ScalarProperty Name="StudentSubjectGrade" ColumnName="StudentSubjectGrade" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyMaterials">
+            <EntityTypeMapping TypeName="EastWoodModel.StudyMaterial">
+              <MappingFragment StoreEntitySet="StudyMaterial">
+                <ScalarProperty Name="StudyMaterialId" ColumnName="StudyMaterialId" />
+                <ScalarProperty Name="StudyMaterialName" ColumnName="StudyMaterialName" />
+                <ScalarProperty Name="StudyMaterialDescription" ColumnName="StudyMaterialDescription" />
+                <ScalarProperty Name="StudyMaterialSubmittedOn" ColumnName="StudyMaterialSubmittedOn" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="EastWoodModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="SubjectDescription" ColumnName="SubjectDescription" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="LecturerId" ColumnName="LecturerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EastWoodModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserBio" ColumnName="UserBio" />
+                <ScalarProperty Name="UserLastLoggedIn" ColumnName="UserLastLoggedIn" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserContactNo" ColumnName="UserContactNo" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

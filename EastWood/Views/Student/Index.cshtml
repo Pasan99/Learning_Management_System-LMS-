@@ -1,0 +1,134 @@
+﻿@model EastWood.ViewModel.Users.HomePageViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+<div class="row">
+    @if (Model.Courses != null)
+    {
+        foreach (var course in Model.Courses.Courses)
+        {
+            <div class="card @(Model.Courses.Courses.IndexOf(course) == ViewBag.SelectedCourseId ? "text-white bg-primary" : "") mb-3" style="max-width: 30rem; margin:8px;">
+                <div class="card-body">
+                    <h3 class="card-title">@course.CourseName</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col">
+                            <p>Starts On : </p>
+                            @course.CourseStartsOn.ToShortDateString()
+                        </div>
+                        <div class="col">
+                            <p>Ends On : </p>
+                            @course.CourseEndsOn.ToShortDateString()
+                        </div>
+                    </div>
+                    <br />
+                    <p class="card-text">Coordinator : @course.CoordinatorDetails.UserFirstName @course.CoordinatorDetails.UserLastName </p>
+                    <p class="card-text">@course.CourseDescription</p>
+                    <hr />
+                    @if (Model.Courses.Courses.IndexOf(course) != ViewBag.SelectedCourseId)
+                    {
+                        <a href="/Student/Index/@Model.Courses.Courses.IndexOf(course)" class="btn btn-primary">Select</a>
+                    }
+
+
+
+                </div>
+            </div>
+        }
+
+    }
+
+</div>
+
+<br />
+@if (Model.Semesters != null)
+{
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        @foreach (var sem in Model.Semesters)
+        {
+            <li class="nav-item">
+                <a class="nav-link @(Model.Semesters.IndexOf(sem) == 0 ? "active" : "")"
+                   id="nav-@sem.SemesterId-tab" data-toggle="tab" href="#nav-@sem.SemesterId" role="tab"
+                   aria-controls="nav-@sem.SemesterId" aria-selected="@(Model.Semesters.IndexOf(sem) == 0 ? "true" : "false")">@sem.SemesterName</a>
+            </li>
+
+        }
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        @foreach (var sem in Model.Semesters)
+        {
+
+            <div class="tab-pane fade @(Model.Semesters.IndexOf(sem) == 0 ? "show active" : "")" id="nav-@sem.SemesterId" role="tabpanel" aria-labelledby="nav-@sem.SemesterId-tab">
+                <br />
+                <div class="row">
+                    <div class="col-8">
+                        <h3>Grade (Semester) : @sem.StudentGradeForSemester</h3>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <br />
+                <table id="example_@sem.SemesterId" class="display" style="width:100%">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Semester
+                            </th>
+                            <th>
+                                Lecturer
+                            </th>
+                            <th class="text-center">Grade</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Subjects != null)
+                        {
+                            foreach (var item in Model.Subjects.Where(w => w.SemesterId == sem.SemesterId).ToList())
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubjectName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Semester.SemesterName)
+                                    </td>
+                                    <td>
+                                        @item.Lecturer.User.UserFirstName @item.Lecturer.User.UserLastName
+                                        @* @Html.DisplayFor(modelItem => item.Lecturer.User.UserFirstName + " " + item.Lecturer.User.UserLastName)*@
+                                    </td>
+                                    <td class="text-center text-white" style="font-weight:bold; background:blue;">
+                                        @item.StudentGradeForSubject
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/Student/Assignments/@item.SubjectId" class="btn btn-primary">Assignments</a>
+                                        <a href="/Student/LectureNotes/@item.SubjectId" class="btn btn-primary">Notes</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                </table>
+                <script>
+            $(document).ready(function () {
+                $('#example_@sem.SemesterId').DataTable();
+            });
+                </script>
+            </div>
+        }
+    </div>
+    <br />
+}
+
+
+
+

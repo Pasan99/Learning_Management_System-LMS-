@@ -1,0 +1,60 @@
+﻿@model EastWood.Models.Subject
+
+@{
+    ViewBag.Title = "New Subject";
+}
+
+<h2>New Subject</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SubjectId)
+    @Html.HiddenFor(model => model.SemesterId)
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SubjectId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubjectName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SubjectName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubjectDescription, new { htmlAttributes = new { @class = "form-control", @required="required" } })
+                @Html.ValidationMessageFor(model => model.SubjectDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LecturerId, "Lecturer", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select required class="form-control" name="LecturerId">
+                    @using (EastWood.Models.EastWoodEntities db = new EastWood.Models.EastWoodEntities())
+                    {
+                        var items = db.Lecturers.ToList();
+                        foreach (var item in items)
+                        {
+                            <option value="@item.LecturerId">@item.User.UserFirstName @item.User.UserLastName</option>
+                        }
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.LecturerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+}
+

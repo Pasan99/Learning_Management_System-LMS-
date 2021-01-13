@@ -1,0 +1,13 @@
+﻿using EastWood.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace EastWood.ViewModel.Users
+{
+    public class LecturerDetails: User
+    {
+        public int LecturerId { get; set; }
+    }
+}
